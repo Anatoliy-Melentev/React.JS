@@ -7,41 +7,50 @@ const IS_DEV = NODE_ENV === 'development';
 const IS_PROD = NODE_ENV === 'production';
 
 function setupDevtool() {
-  if (IS_DEV) return 'eval';
-  if (IS_PROD) return false;
+	if (IS_DEV) return 'eval';
+	if (IS_PROD) return false;
 }
 
 module.exports = {
-  watchOptions: {
-    ignored: /dist/
-  },
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
-    alias: { 'react-dom': IS_DEV ? '@hot-loader/react-dom' : 'react-dom' },
-  },
-  mode: NODE_ENV ? NODE_ENV : 'development',
-  entry: [
-    path.resolve(__dirname, '../src/client/index.jsx'),
-    'webpack-hot-middleware/client?path=http://localhost:3001/static/__webpack_hmr',
-  ],
-  output: {
-    path: path.resolve(__dirname, '../dist/client'),
-    filename: 'client.js',
-    publicPath: '/static/',
-  },
-  module: {
-    rules: [{
-      test: /\.[tj]sx?$/,
-      //use: ['ts-loader']
-       use: {
-         loader: 'babel-loader',
-         options: {
-           presets: ['@babel/preset-env', '@babel/preset-react'],
-           plugins: ['@babel/plugin-proposal-object-rest-spread']
-         }
-       },
-    }]
-  },
-  devtool: setupDevtool(),
-  plugins: IS_DEV ? [new CleanWebpackPlugin(), new HotModuleReplacementPlugin()] : [],
+	watchOptions: { ignored: /dist/ },
+	resolve: {
+		extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css', '.sass'],
+		alias: { 'react-dom': IS_DEV ? '@hot-loader/react-dom' : 'react-dom' },
+	},
+	mode: NODE_ENV ? NODE_ENV : 'development',
+	entry: [
+		path.resolve(__dirname, '../src/client/index.jsx'),
+		'webpack-hot-middleware/client?path=http://localhost:3001/static/__webpack_hmr',
+	],
+	output: {
+		path: path.resolve(__dirname, '../dist/client'),
+		filename: 'client.js',
+		publicPath: '/static/',
+	},
+	module: {
+		rules: [{
+			test: /\.[tj]sx?$/,
+			//use: ['ts-loader'],
+			use: {
+				loader: 'babel-loader',
+				options: {
+					presets: ['@babel/preset-env', '@babel/preset-react'],
+					plugins: ['@babel/plugin-proposal-object-rest-spread']
+				}
+			},
+		}, {
+			test: /\.sass$/,
+			use: ['style-loader', {
+				loader: 'css-loader',
+				options: {
+					modules: {
+						mode: 'local',
+						localIdentName: '[name]__[local]--[hash:base64:5]',
+					},
+				}
+			}, 'sass-loader'],
+		}]
+	},
+	devtool: setupDevtool(),
+	plugins: IS_DEV ? [new CleanWebpackPlugin(), new HotModuleReplacementPlugin()] : [],
 };

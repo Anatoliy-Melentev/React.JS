@@ -1,13 +1,14 @@
 import { hot } from 'react-hot-loader/root';
 import * as React from "react";
+import styles from './header.sass';
 
 function HeaderComponent() {
-  return (
-    <header>
-      <h1>Reddit for our ownjkl</h1>
-      <a href="gd">fdhjghjg</a>
-    </header>
-  )
+	//console.log(styles, styles.example);
+	return (
+		<header>
+			<h1 className={styles.example}>Example</h1>
+		</header>
+	)
 }
 
 export const Header = hot(HeaderComponent);
