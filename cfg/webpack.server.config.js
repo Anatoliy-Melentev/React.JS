@@ -1,7 +1,8 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+//const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const NODE_ENV = process.env.NODE_ENV;
+const GLOBAL_CSS_REGEXP = /\.global\.sass$/;
 
 module.exports = {
 	target: 'node',
@@ -10,30 +11,26 @@ module.exports = {
 	output: { path: path.resolve(__dirname, '../dist/server'), filename: 'server.js' },
 	resolve: { extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css', '.sass'] },
 	externals: [nodeExternals()],
-	plugins: [new MiniCssExtractPlugin()],
+//	plugins: [new MiniCssExtractPlugin()],
 	module: {
 		rules: [{
 			test: /\.[tj]sx?$/,
-			//use: ['ts-loader'],
-			use: {
-				loader: 'babel-loader',
-				options: {
-					presets: ['@babel/preset-env', '@babel/preset-react'],
-					plugins: ['@babel/plugin-proposal-object-rest-spread']
-				}
-			},
+			loader: 'babel-loader',
 		}, {
 			test: /\.sass$/i,
-			use: [MiniCssExtractPlugin.loader, {
+			use: [/*MiniCssExtractPlugin.loader, */{
 				loader: 'css-loader',
 				options: {
 					modules: {
 						mode: 'local',
 						localIdentName: '[name]__[local]--[hash:base64:5]',
 					},
-					//onlyLocals: true,
 				}
 			}, 'sass-loader'],
+			exclude: GLOBAL_CSS_REGEXP,
+		}, {
+			test: GLOBAL_CSS_REGEXP,
+			use: ['css-loader', 'sass-loader'],
 		}]
 	},
 	optimization: { minimize: false }
