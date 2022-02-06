@@ -13,3 +13,5 @@ export function Content({ children }: IContentProps) {
     </main>
   );
 }
+
+
