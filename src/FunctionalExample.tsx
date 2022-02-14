@@ -1,9 +1,8 @@
 import React from "react";
 
-add(1)(1) // ->2
-
 const add = (leftSide: number) => (rightSide: number) => leftSide = rightSide;
 
+add(1)(1) // ->2
 const addOne = add(1);
 const addSix = add(6);
 
