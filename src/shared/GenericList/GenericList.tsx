@@ -1,8 +1,8 @@
 import * as React from "react";
 
-interface IItem {
+export interface IItem {
   id: string;
-  text: string;
+  text: string | React.ReactNode;
   onClick: (id: string) => void;
   className?: string;
   As?: 'a' | 'li' | 'button' | 'div';

@@ -4,6 +4,7 @@ import styles from './dropdown.sass';
 interface IDropdownProps {
   button: React.ReactNode;
   children: React.ReactNode;
+  className?: string;
   isOpen?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
