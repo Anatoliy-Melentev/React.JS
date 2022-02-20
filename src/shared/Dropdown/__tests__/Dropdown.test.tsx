@@ -6,7 +6,7 @@ import React from 'react';
 import { shallow, mount, render } from "enzyme";
 import { Dropdown } from "../Dropdown";
 import styles from "../../CardsList/Card/Menu/menu.sass";
-import { SvgIcon } from "../../SvgIcon";
+import { Icon } from "../../Icon";
 import { configure } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
@@ -17,7 +17,7 @@ describe('Dropdown', () => {
     const wrapper = shallow(<Dropdown
         button={
           <button className={styles.menuButton}>
-            <SvgIcon w={5} h={20} name='menu' />
+            <Icon size={20} name='menu' />
           </button>
         }
         children={<div></div>}

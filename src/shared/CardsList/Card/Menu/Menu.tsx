@@ -3,14 +3,14 @@ import styles from './menu.sass';
 import { Dropdown } from "../../../Dropdown";
 import { MenuItem } from "./MenuItem";
 import { generateId } from "../../../../utils/react/generateRandomIndex";
-import { SvgIcon } from "../../../SvgIcon";
+import { Icon } from "../../../Icon";
 
 const LIST = [
-  { text: 'Комментарии', svg: { w: 15, h: 15, name: 'comments' } },
-  { text: 'Поделиться', svg: { w: 12, h: 12, name: 'share' } },
-  { text: 'Скрыть', svg: { w: 14, h: 14, name: 'hide' } },
-  { text: 'Сохранить', svg: { w: 14, h: 14, name: 'save' } },
-  { text: 'Пожаловаться', svg: { w: 16, h: 14, name: 'complain' } },
+  { text: 'Комментарии', svg: { size: 15, name: 'comments' } },
+  { text: 'Поделиться', svg: { size: 15, name: 'share' } },
+  { text: 'Скрыть', svg: { size: 15, name: 'hide' } },
+  { text: 'Сохранить', svg: { size: 15, name: 'save' } },
+  { text: 'Пожаловаться', svg: { size: 15, name: 'complain' } },
   { text: 'Закрыть', className: styles.divider },
 ];
 
@@ -24,7 +24,7 @@ export function Menu() {
         className={styles.dropdown}
         button={
           <button className={styles.menuButton}>
-            <SvgIcon w={5} h={20} name='menu' />
+            <Icon size={20} name='menu' />
           </button>
         }
       >

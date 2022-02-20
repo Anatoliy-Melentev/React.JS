@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './menuitem.sass';
-import { SvgIcon } from "../../../../SvgIcon";
+import { Icon } from "../../../../Icon";
 
 interface IMenuItemProps {
   item: {
     id: string;
     text: string;
-    svg?: { w: number, h: number, name: string };
+    svg?: { size: number, name: string };
     className?: string;
   },
   onClick?: (id: string) => void;
@@ -18,7 +18,7 @@ export function MenuItem({ item: { id, text, svg, className }, onClick = noop }:
   return (
     <a href="#" onClick={() => onClick(id)} >
       <div className={`${styles.menuItem} ${className}`} >
-        { svg && <SvgIcon className={styles.svg} w={svg.w} h={svg.h} name={svg.name}/>}
+        { svg && <Icon className={styles.svg} size={svg.size} name={svg.name}/>}
         <span>{text}</span>
       </div>
     </a>
