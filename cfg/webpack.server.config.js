@@ -31,7 +31,17 @@ module.exports = {
 		}, {
 			test: GLOBAL_CSS_REGEXP,
 			use: ['css-loader', 'sass-loader'],
-		}]
+		}, {
+      test: /\.(png|jp(e*)g|svg|gif)$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            name: 'img/[hash]-[name].[ext]',
+          },
+        },
+      ],
+    }]
 	},
 	optimization: { minimize: false }
 };

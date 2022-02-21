@@ -1,0 +1,41 @@
+@import "../../../../../variables.global"
+
+.menuItemsList
+  padding: 0
+
+.menuItem
+  padding: 12px 20px
+  display: flex
+  flex-flow: row nowrap
+  justify-content: flex-start
+  align-items: center
+  background-color: white
+  white-space: nowrap
+
+.menuItem svg + span
+  margin-left: 7px
+  display: inline
+
+.menuItem svg
+  min-width: 20px
+  min-height: 14px
+  fill: #999999
+
+.menuItem:hover > svg
+  fill: #cc6633
+
+.menuItem span
+  line-height: 20px
+  display: inline
+  color: #999
+
+.menuItem:hover span
+  color: #cc6633
+
+.menuItemsList .divider
+  height: 1px
+  width: 100%
+  background-color: $greyEC
+  padding: 18px 20px
+  display: flex
+  justify-content: center

@@ -54,7 +54,17 @@ module.exports = {
 		}, {
 			test: GLOBAL_CSS_REGEXP,
 			use: ['style-loader', 'css-loader', 'sass-loader'],
-		}]
+		}, {
+      test: /\.(png|jp(e*)g|svg|gif)$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            name: 'img/[hash]-[name].[ext]',
+          },
+        },
+      ],
+    }]
 	},
 	devtool: setupDevtool(),
 	plugins: IS_DEV ? [new CleanWebpackPlugin(), new HotModuleReplacementPlugin()] : [],
