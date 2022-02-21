@@ -3,14 +3,14 @@ import styles from './menu.sass';
 import { Dropdown } from "../../../Dropdown";
 import { MenuItem } from "./MenuItem";
 import { generateId } from "../../../../utils/react/generateRandomIndex";
-import { Icon } from "../../../Icon";
+import { Icon, EIcon } from "../../../Icon";
 
 const LIST = [
-  { text: 'Комментарии', svg: { size: 15, name: 'comments' } },
-  { text: 'Поделиться', svg: { size: 15, name: 'share' } },
-  { text: 'Скрыть', svg: { size: 15, name: 'hide' } },
-  { text: 'Сохранить', svg: { size: 15, name: 'save' } },
-  { text: 'Пожаловаться', svg: { size: 15, name: 'complain' } },
+  { text: 'Комментарии', svg: { size: 15, name: EIcon.comments } },
+  { text: 'Поделиться', svg: { size: 15, name: EIcon.share } },
+  { text: 'Скрыть', svg: { size: 15, name: EIcon.hide } },
+  { text: 'Сохранить', svg: { size: 15, name: EIcon.save } },
+  { text: 'Пожаловаться', svg: { size: 15, name: EIcon.complain } },
   { text: 'Закрыть', className: styles.divider },
 ];
 
@@ -24,7 +24,7 @@ export function Menu() {
         className={styles.dropdown}
         button={
           <button className={styles.menuButton}>
-            <Icon size={20} name='menu' />
+            <Icon size={20} name={EIcon.menu} />
           </button>
         }
       >

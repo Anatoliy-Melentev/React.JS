@@ -15,8 +15,6 @@ function AppComponent() {
       <Header />
       <Content>
         <CardsList />
-        <br/>
-        <Text size={20} color={Ecolor.green}>Label1</Text>
       </Content>
     </Layout>
   )
