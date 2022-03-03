@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './commentsbutton.sass';
-import { SvgIcon } from "../../../../SvgIcon";
+import { Icon, EIcon } from "../../../../Icon";
 
 export function CommentsButton() {
   return (
     <button className={styles.commentsButton}>
-      <SvgIcon w={15} h={15} name='comments' />
+      <Icon size={20} name={EIcon.comments} />
       <span className={styles.commentsNumber}>13</span>
     </button>
   );

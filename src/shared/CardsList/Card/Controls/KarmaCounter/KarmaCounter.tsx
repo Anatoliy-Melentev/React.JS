@@ -1,16 +1,16 @@
 import React from 'react';
 import styles from './karmacounter.sass';
-import { SvgIcon } from "../../../../SvgIcon";
+import { Icon, EIcon } from "../../../../Icon";
 
 export function KarmaCounter() {
   return (
     <div className={styles.karmaCounter}>
       <button className={styles.up}>
-        <SvgIcon w={19} h={10} name='up' />
+        <Icon size={20} name={EIcon.up} />
       </button>
       <span className={styles.karmaValue}>123</span>
       <button className={styles.down}>
-        <SvgIcon w={19} h={10} name='down' />
+        <Icon size={20} name={EIcon.down} />
       </button>
     </div>
   );

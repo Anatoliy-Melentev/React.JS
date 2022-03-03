@@ -2,4 +2,10 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  moduleNameMapper: {
+    "\\.(sass)": "identity-obj-proxy",
+    "\\.(svg)": "identity-obj-proxy",
+  },
+  snapshotSerializers: ["enzyme-to-json/serializer"]
 };

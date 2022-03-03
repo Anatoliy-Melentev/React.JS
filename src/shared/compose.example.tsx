@@ -3,7 +3,7 @@ import { getValue } from "../utils/react/pickFromSyntheticEvent";
 import { preventDefault } from "../utils/react/preventDefault";
 import { stopPropagation } from "../utils/react/stopPropagation";
 
-function InputExample({ value, onChange }): any {
+function InputExample({ value, onChange }: {value: string, onChange: (value: string) => void }): any {
   return (
     <input
       value={value}

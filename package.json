@@ -1,9 +1,10 @@
 {
   "dependencies": {
     "@types/jest": "^27.4.0",
+    "classnames": "^2.3.1",
     "cross-env": "^7.0.3",
     "express": "^4.17.2",
-    "jest": "^27.4.7",
+    "jest": "^27.5.1",
     "nodemon": "^2.0.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -21,12 +22,18 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@hot-loader/react-dom": "^17.0.1",
+    "@types/classnames": "^2.3.1",
+    "@types/enzyme": "^3.10.11",
     "@types/react": "^17.0.38",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
     "babel-loader": "^8.2.3",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.5.1",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
+    "identity-obj-proxy": "^3.0.0",
     "mini-css-extract-plugin": "^2.4.6",
     "node-sass": "^7.0.1",
     "react-hot-loader": "^4.13.0",
@@ -53,7 +60,7 @@
     "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.js",
     "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "dev": "cross-env NODE_ENV=development node ./bin/dev.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
