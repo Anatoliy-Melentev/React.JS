@@ -20,6 +20,7 @@ export enum EIcon {
   hide = 'hide',
   save = 'save',
   complain = 'complain',
+  anonim = 'anonim',
 };
 
 export function Icon({ name, size = 20, className = '' }: IIcon) {

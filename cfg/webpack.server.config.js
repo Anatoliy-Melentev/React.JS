@@ -1,6 +1,6 @@
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 const nodeExternals = require('webpack-node-externals');
-//const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const NODE_ENV = process.env.NODE_ENV;
 const GLOBAL_CSS_REGEXP = /\.global\.sass$/;
 
@@ -11,7 +11,6 @@ module.exports = {
 	output: { path: path.resolve(__dirname, '../dist/server'), filename: 'server.js' },
 	resolve: { extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css', '.sass'] },
 	externals: [nodeExternals()],
-//	plugins: [new MiniCssExtractPlugin()],
 	module: {
 		rules: [{
 			test: /\.[tj]sx?$/,
@@ -43,5 +42,6 @@ module.exports = {
       ],
     }]
 	},
-	optimization: { minimize: false }
+	optimization: { minimize: false },
+  plugins: [new DefinePlugin({ 'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'` })],
 };
