@@ -3,17 +3,23 @@ import styles from './textcontent.sass';
 import { UserLink } from "./UserLink";
 import { Title } from "./Title";
 
-export function TextContent() {
+
+interface ITextContentProps {
+  title: string;
+  author: string;
+  date: string;
+}
+
+export function TextContent({ title, author, date }: ITextContentProps) {
   return (
     <div className={styles.textContent}>
       <div className={styles.metaData}>
-        <UserLink />
+        <UserLink author={author} />
         <span className={styles.createdAt}>
-          <span className={styles.publishedLabel}>опубликовано </span>
-          4 часа назад
+          <span className={styles.publishedLabel}>опубликовано </span>{date} назад
         </span>
       </div>
-      <Title />
+      <Title title={title} />
     </div>
   );
 }

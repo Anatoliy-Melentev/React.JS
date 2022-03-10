@@ -5,13 +5,21 @@ import { Preview } from "./Preview";
 import { Menu } from "./Menu";
 import { Controls } from "./Controls";
 
-export function Card() {
+interface ICardProps {
+  title: string;
+  author: string;
+  date: string;
+  img: string;
+  score: number;
+}
+
+export function Card({ title, author, date, img, score }: ICardProps) {
   return (
     <li className={styles.card}>
-      <TextContent />
-      <Preview />
+      <TextContent title={title} author={author} date={date} />
+      <Preview img={img} />
       <Menu />
-      <Controls />
+      <Controls score={score} />
     </li>
   );
 }
