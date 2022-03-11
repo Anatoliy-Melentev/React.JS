@@ -2,10 +2,7 @@ import React from 'react';
 import { usePostsData } from "../../hooks/usePostsData";
 
 interface IPostsContextData {
-  data?: {
-    children: Array<object>;
-    [n: string]: string | null | number | Array<object>;
-  };
+  [n: number]: string | number;
 }
 
 export const postsContext = React.createContext<IPostsContextData>({});
@@ -16,7 +13,7 @@ export function PostsContextProvider({ children }: { children: React.ReactNode }
     { Provider } = postsContext;
 
   return (
-    <Provider value={data.data}>
+    <Provider value={data}>
       {children}
     </Provider>
   );
