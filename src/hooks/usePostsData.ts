@@ -3,11 +3,13 @@ import { tokenContext } from "../shared/context/tokenContext";
 import axios from "axios";
 
 interface IPostsData {
-  [n: string]: object;
+  data: {
+    [n: string]: string | number;
+  }
 }
 
 export function usePostsData() {
-  const [data, setData] = useState<IPostsData>({});
+  const [data, setData] = useState<{[n: string]: string | number}>({});
   const token = useContext(tokenContext);
 
   useEffect(() => {
@@ -16,7 +18,15 @@ export function usePostsData() {
         headers: { Authorization: `bearer ${token}` },
         method: 'HEAD',
       })
-      .then(resp => setData(resp.data))
+      .then(resp => {
+        if (resp.data?.data?.children?.length) {
+          setData(resp.data?.data?.children.map(
+            ({ data: { id, title, author, created, thumbnail, score }} : IPostsData) => ({
+              id, title, author, score, created, thumbnail
+            })
+          ));
+        }
+      })
       .catch(console.log);
   }, [token]);
 
