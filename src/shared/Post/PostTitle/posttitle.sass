@@ -1,0 +1,63 @@
+@import "../../../variables.global"
+
+.textContent
+  display: flex
+  flex-flow: row wrap
+
+.textContent > * + *
+  padding: 7px 0 0
+
+.title
+  font-size: 16px
+  line-height: 19px
+  font-weight: normal
+  margin: 0
+
+.title button
+  text-align: left
+
+
+.metaData
+  display: flex
+  flex-flow: row nowrap
+  align-items: center
+  font-size: 10px
+  line-height: 12px
+
+.publishedLabel
+  display: none
+
+.createdAt, .createdAt span
+  color: $grey99
+
+@media all and (min-width: 1024px)
+  .textContent
+    flex-basis: 540px
+    order: 1
+    margin: 0 0 0 38px
+    flex-flow: column-reverse nowrap
+    justify-content: center
+
+  .textContent > *
+    flex: 0 0
+
+  .metaData
+    flex-flow: row-reverse nowrap
+    justify-content: flex-end
+    font-size: 14px
+    line-height: 16px
+
+  .publishedLabel
+    display: inline
+
+  .title
+    padding: 0 40px 14px 0
+    font-size: 20px
+    line-height: 23px
+
+.title button
+    text-align: left
+
+@media all and (min-width: 1540px)
+  .textContent
+    flex-basis: 672px

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './text.sass';
 import classNames from 'classnames';
 
-export enum Ecolor {
+export enum EColor {
   black = 'black',
   orange = 'orange',
   green = 'green',
@@ -25,21 +25,23 @@ interface ITextProps {
   mobileSize?: TSizes;
   tabletSize?: TSizes;
   desktopSize?: TSizes;
-  color?: Ecolor;
+  color?: EColor;
   bold?: boolean;
+  className?: string;
 }
 
 export function Text(props: ITextProps) {
   const
     {
       As = 'span',
-      color = Ecolor.black,
+      color = EColor.black,
       children,
       size,
       bold = false,
       mobileSize,
       tabletSize,
-      desktopSize
+      desktopSize,
+      className,
     } = props,
     classes = classNames(
       styles[`s${size}`],
@@ -48,6 +50,7 @@ export function Text(props: ITextProps) {
       { [styles[`m${mobileSize}`]]: mobileSize },
       { [styles[`t${tabletSize}`]]: tabletSize },
       { [styles[`d${desktopSize}`]]: desktopSize },
+      className,
     );
 
   return (

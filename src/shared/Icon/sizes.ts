@@ -14,6 +14,8 @@ const baseSizes: IBaseSizes = {
   save: [19, 19],
   complain: [20, 19],
   anonim: [20, 20],
+  close: [20, 20],
+  stroke: [20, 11],
 };
 
 const enum sizes {
