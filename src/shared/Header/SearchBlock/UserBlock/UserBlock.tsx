@@ -1,10 +1,9 @@
 import React from 'react';
-import { Break } from "../../Break"
-import { EIcon, Icon } from '../../Icon';
-import { Ecolor, Text } from "../../Text"
+import { Break } from "../../../Break"
+import { EIcon, Icon } from '../../../Icon';
+import { Ecolor, Text } from "../../../Text"
 import styles from './userblock.sass';
-import { createLinkParams } from "../../../utils/js/createLinkParams";
-import { generateRandomString } from "../../../utils/react/generateRandomIndex";
+import { createLinkParams } from "../../../../utils/js/createLinkParams";
 
 
 interface IUserBlockProps {
@@ -13,9 +12,9 @@ interface IUserBlockProps {
 }
 
 const authParams: {[n: string]: string} = {
-  client_id: 'D3MkISAKZgrgNQDzaLjFoA',
+  client_id: 'VxRfhdESA8Ms6wZqVG9SFA',
   response_type: 'code',
-  state: generateRandomString(),
+  state: 'random_string',
   redirect_uri: 'http://localhost:3000/auth',
   duration: 'permanent',
   scope: 'read submit identity',
@@ -24,7 +23,7 @@ const authParams: {[n: string]: string} = {
 export function UserBlock({ avatarSrc, username }: IUserBlockProps) {
   return (
     <a
-      href={`https://www.reddit.com/api/v1/authorize${createLinkParams(authParams)}`}
+      href={`https://www.reddit.com/api/v1/authorize?${createLinkParams(authParams)}`}
       className={styles.userBox}
     >
       <div className={styles.avatarBox}>

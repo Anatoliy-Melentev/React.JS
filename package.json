@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@types/jest": "^27.4.0",
+    "axios": "^0.26.0",
     "classnames": "^2.3.1",
     "cross-env": "^7.0.3",
     "express": "^4.17.2",
@@ -59,7 +60,7 @@
   "scripts": {
     "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.js",
     "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "dev": "cross-env NODE_ENV=development CLIENT_ID=D3MkISAKZgrgNQDzaLjFoA node ./bin/dev.js",
+    "dev": "cross-env NODE_ENV=development node ./bin/dev.js",
     "test": "jest"
   },
   "repository": {
