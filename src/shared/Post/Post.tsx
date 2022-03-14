@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './post.sass';
-import { CommentForm } from "../CommentForm";
 import { EIcon } from "../Icon";
 import { KarmaCounter } from "../KarmaCounter";
 import { Comments } from "../Comments";
@@ -9,6 +8,7 @@ import { CommentsFilter } from "../CommentsFilter";
 import { Break } from "../Break";
 import { PostTitle } from "./PostTitle";
 import { IconBtn } from "../IconBtn";
+import { CommentFormContainer } from "../CommentFormContainer";
 
 interface IPostProps {
   onClose?: () => void;
@@ -46,7 +46,7 @@ export function Post({ onClose, author, date, title, score }: IPostProps) {
         <p>Есть над чем задуматься: тщательные исследования конкурентов представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и должны быть ассоциативно распределены по отраслям. Прежде всего, начало повседневной работы по формированию позиции однозначно фиксирует необходимость кластеризации усилий. Но сторонники тоталитаризма в науке и по сей день остаются уделом либералов, которые жаждут быть превращены в посмешище, хотя само их существование приносит несомненную пользу обществу.</p>
         <p>Есть над чем задуматься: тщательные исследования конкурентов представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и должны быть ассоциативно распределены по отраслям. Прежде всего, начало повседневной работы по формированию позиции однозначно фиксирует необходимость кластеризации усилий. Но сторонники тоталитаризма в науке и по сей день остаются уделом либералов, которые жаждут быть превращены в посмешище, хотя само их существование приносит несомненную пользу обществу.</p>
       </div>
-      <CommentForm id={"0"} author={'Анатолий'} isMyself />
+      <CommentFormContainer id={"0"} author={'Анатолий'} isMyself />
       <Break size={36} top />
       <CommentsFilter/>
       <Break size={48} top />

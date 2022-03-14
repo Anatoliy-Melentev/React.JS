@@ -1,39 +1,41 @@
 import * as React from "react";
-import { useToken } from "./hooks/useToken";
 import { hot } from 'react-hot-loader/root';
+
+import { useToken } from "./hooks/useToken";
+
 import { CardsList } from "./shared/CardsList";
 import { Content } from "./shared/Content";
 import { Header } from './shared/Header';
 import { Layout } from './shared/Layout';
 
-import './variables.global.sass';
 import './main.global.sass';
-import { tokenContext } from "./shared/context/tokenContext";
+import './variables.global.sass';
 import { UserContextProvider } from "./shared/context/userContext";
 import { PostsContextProvider } from "./shared/context/postsContext";
-import { useState } from "react";
-import { commentContext } from "./shared/context/commentContext";
+
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { rootReducer } from "./store/store";
+
+const store = createStore(rootReducer, composeWithDevTools());
 
 function AppComponent() {
   const [token] = useToken();
-  const [commentValue, setCommentValue] = useState('');
-  const CommentProvider = commentContext.Provider;
 
   return (
-    <CommentProvider value={{ value: commentValue, onChange: setCommentValue }}>
-      <tokenContext.Provider value={token}>
-        <UserContextProvider>
-          <PostsContextProvider>
-            <Layout>
-              <Header />
-              <Content>
-                <CardsList />
-              </Content>
-            </Layout>
-          </PostsContextProvider>
-        </UserContextProvider>
-      </tokenContext.Provider>
-    </CommentProvider>
+    <Provider store={store}>
+      <UserContextProvider>
+        <PostsContextProvider>
+          <Layout token={token} >
+            <Header />
+            <Content>
+              <CardsList />
+            </Content>
+          </Layout>
+        </PostsContextProvider>
+      </UserContextProvider>
+    </Provider>
   )
 }
 

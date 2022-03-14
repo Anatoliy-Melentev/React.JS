@@ -4,8 +4,8 @@ import { EIcon } from "../../Icon";
 import { Break } from "../../Break";
 import { CommentTree } from "./CommentTree";
 import { CommentTitle } from "./CommentTitle";
-import { CommentForm } from "../../CommentForm";
 import { Action } from "../../Action";
+import { CommentFormContainer } from "../../CommentFormContainer";
 
 interface ICommentProps {
   comment?: React.ReactElement;
@@ -32,7 +32,7 @@ export function Comment({ id, comment, author }: ICommentProps) {
         {showForm && (
           <>
             <Break size={12} top />
-            <CommentForm id={id} author={author} />
+            <CommentFormContainer id={id} author={author} />
           </>
         )}
         <Break size={12} top />
