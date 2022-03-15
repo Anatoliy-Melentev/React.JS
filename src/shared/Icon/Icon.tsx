@@ -21,6 +21,8 @@ export enum EIcon {
   save = 'save',
   complain = 'complain',
   anonim = 'anonim',
+  close = 'close',
+  stroke = 'stroke',
 };
 
 export function Icon({ name, size = 20, className = '' }: IIcon) {

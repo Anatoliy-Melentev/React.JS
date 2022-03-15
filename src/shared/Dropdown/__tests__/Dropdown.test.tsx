@@ -9,17 +9,14 @@ import styles from "../../CardsList/Card/Menu/menu.sass";
 import { Icon, EIcon } from "../../Icon";
 import { configure } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import { IconBtn } from "../../IconBtn";
 
 configure({ adapter: new Adapter() });
 
 describe('Dropdown', () => {
   test('should render', () => {
     const wrapper = shallow(<Dropdown
-        button={
-          <button className={styles.menuButton}>
-            <Icon size={20} name={EIcon.menu} />
-          </button>
-        }
+        button={<IconBtn className={styles.menuButton} icon={EIcon.menu} />}
         children={<div></div>}
       />);
     expect(wrapper).toBeDefined();

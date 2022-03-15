@@ -1,7 +1,7 @@
 import React from 'react';
 import { Break } from "../../../Break"
-import { EIcon, Icon } from '../../../Icon';
-import { Ecolor, Text } from "../../../Text"
+import { Icon, EIcon } from '../../../Icon';
+import { Text, EColor } from "../../../Text"
 import styles from './userblock.sass';
 import { createLinkParams } from "../../../../utils/js/createLinkParams";
 
@@ -35,7 +35,7 @@ export function UserBlock({ avatarSrc, username }: IUserBlockProps) {
 
       <div className={styles.username}>
         <Break size={12} />
-        <Text size={20} color={username ? Ecolor.black : Ecolor.grey99} >{username || 'Аноним'}</Text>
+        <Text size={20} color={username ? EColor.black : EColor.grey99} >{username || 'Аноним'}</Text>
       </div>
     </a>
   );

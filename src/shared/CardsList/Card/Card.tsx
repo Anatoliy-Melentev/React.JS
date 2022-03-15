@@ -20,7 +20,7 @@ interface ICardProps {
 export function Card({ data: { title, author, created, thumbnail, score } }: ICardProps) {
   return (
     <li className={styles.card}>
-      <TextContent title={title} author={author} date={createAfterDate(created * 1000)} />
+      <TextContent title={title} author={author} score={score} date={createAfterDate(created * 1000)} />
       <Preview img={thumbnail.length > 20 ? thumbnail : img} />
       <Menu />
       <Controls score={score} />
