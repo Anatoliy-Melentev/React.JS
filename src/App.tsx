@@ -13,21 +13,45 @@ import './variables.global.sass';
 import { UserContextProvider } from "./shared/context/userContext";
 import { PostsContextProvider } from "./shared/context/postsContext";
 
-import { createStore } from "redux";
-import { Provider } from "react-redux";
+import { createStore, applyMiddleware, Middleware, Action } from "redux";
+import { Provider, useDispatch } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { rootReducer } from "./store/store";
+import { rootReducer, RootState, updateToken } from "./store/reducer";
+import thunk, { ThunkAction } from 'redux-thunk';
+import { useEffect } from "react";
 
-const store = createStore(rootReducer, composeWithDevTools());
+// const ping: Middleware = (store) => (next) => (action) => {
+//   console.log('ping');
+//   next(action);
+// };
+// const pong: Middleware = (store) => (next) => (action) => {
+//   console.log('pong');
+//   next(action);
+// };
+
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+
+const timeout = (ms: number): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
+  dispatch({ type: 'START'});
+  setTimeout(() => dispatch({ type: 'FINISH'}), ms);
+
+}
 
 function AppComponent() {
-  const [token] = useToken();
-
+  useEffect(() => {
+    const token = window.__token__;
+    store.dispatch(updateToken(token));
+    // @ts-ignore
+    store.dispatch(timeout(3000));
+    if (token?.length) {
+      localStorage.setItem('token', token);
+    }
+  }, [])
   return (
     <Provider store={store}>
       <UserContextProvider>
         <PostsContextProvider>
-          <Layout token={token} >
+          <Layout >
             <Header />
             <Content>
               <CardsList />
