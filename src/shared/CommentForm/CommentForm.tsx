@@ -1,37 +1,22 @@
-import React, { ChangeEvent, useContext, useRef, useState } from 'react';
-import styles from './commentform.sass';
-import { preventDefault } from "../../utils/react/preventDefault";
-import { commentContext } from "../context/commentContext";
+import React, { ChangeEvent, FormEvent, useRef } from 'react';
 import { useMountEffect } from "../../hooks/useMountEffect";
+import styles from './commentform.sass';
 
-export function CommentForm({ id, author = '', isMyself = false }: { id: string; author?: string, isMyself?: boolean}) {
-  const { value, onChange } = useContext(commentContext);
-  const [placeholder, setPlaceholder] = useState('');
+interface ICommentFormProps {
+  value?: string;
+  placeholder?: string;
+  onSubmit?: (e: FormEvent<HTMLFormElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+export function CommentForm({ value, placeholder, onSubmit, onChange }: ICommentFormProps) {
   const ref = useRef<HTMLTextAreaElement>(null);
-  //const unCtrlRef = useRef<HTMLTextAreaElement>(null);
-
-  useMountEffect(() => {
-    ref.current?.focus();
-    if (isMyself) {
-      setPlaceholder(`${author ? author + ', о' : 'О'}ставьте ваш комментарий`);
-    } else {
-      author && onChange({ ...value, [id]: `${author}, ` });
-    }
-  });
+  useMountEffect(() => ref.current?.focus());
 
   return (
-    <>
-    <form className={styles.form} onSubmit={preventDefault(() => console.log(value[id]))}>
-      <textarea ref={ref} className={styles.input} value={value[id]} placeholder={placeholder}
-        onChange={({ target }: ChangeEvent<HTMLTextAreaElement>) => onChange({ ...value, [id]: target.value })} />
+    <form className={styles.form} onSubmit={onSubmit}>
+      <textarea ref={ref} className={styles.input} value={value} placeholder={placeholder} onChange={onChange} />
       <button type="submit" className={styles.button} >Комментировать</button>
     </form>
-
-    {/*uncontrolled компонент*/}
-    {/*<form className={styles.form} onSubmit={preventDefault(() => console.log(unCtrlRef.current?.value))}>
-      <textarea ref={unCtrlRef} className={styles.input} />
-      <button type="submit" className={styles.button} >Комментировать</button>
-    </form>*/}
-    </>
   );
 }
