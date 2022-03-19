@@ -1,46 +1,26 @@
-import { ActionCreator, AnyAction, Reducer } from "redux";
+import { Reducer } from "redux";
 import {
-  ME_REQUEST,
-  ME_REQUEST_ERROR,
-  ME_REQUEST_SUCCESS,
-  MeRequestAction, MeRequestErrorAction,
-  MeRequestSuccessAction
+  ME_REQUEST, ME_REQUEST_ERROR, ME_REQUEST_SUCCESS,
+  MeRequestAction, MeRequestErrorAction, MeRequestSuccessAction
 } from "./me/actions";
 import { meReducer, MeState } from "./me/reducer";
+import { SET_TOKEN, SetTokenAction } from "./token/actions";
+import { tokenReducer } from "./token/reducer";
+import { commentReducer } from "./comment/reducer";
+import { UPDATE_COMMENT, UpdateCommentAction } from "./comment/actions";
 
-export type CommentTextType = undefined | {
+export type CommentFormTextType = undefined | {
   [n: string]: string
 };
 
 export type RootState = {
-  commentText?: CommentTextType;
+  commentFormText?: CommentFormTextType;
   token?: string;
   me: MeState;
 };
 
-const UPDATE_COMMENT = 'UPDATE_COMMENT';
-type UpdateCommentAction = {
-  type: typeof UPDATE_COMMENT;
-  payload: { id: string; text: string; };
-}
-
-export const updateComment: ActionCreator<UpdateCommentAction> = (id: string, text: string) => ({
-  type: UPDATE_COMMENT,
-  payload: { id: id, text: text },
-});
-
-const SET_TOKEN = 'SET_TOKEN';
-type SetTokenAction = {
-  type: typeof SET_TOKEN;
-  payload: string;
-}
-export const updateToken: ActionCreator<SetTokenAction> = (token: string) => ({
-  type: SET_TOKEN,
-  payload: token,
-});
-
 const initialState: RootState = {
-  commentText: {},
+  commentFormText: {},
   token: '',
   me: {
     loading: false,
@@ -57,25 +37,13 @@ type Action = UpdateCommentAction | SetTokenAction | MeRequestAction | MeRequest
 export const rootReducer: Reducer<RootState | undefined, Action> = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_COMMENT:
-      return {
-        ...state,
-        commentText: {
-          ...state.commentText,
-          [action.payload.id]: action.payload.text,
-        },
-      };
+      return { ...state, commentFormText: commentReducer(state.commentFormText, action) };
     case SET_TOKEN:
-      return {
-        ...state,
-        token: action.payload,
-      };
+      return { ...state, token: tokenReducer(state.token, action) };
     case ME_REQUEST:
     case ME_REQUEST_SUCCESS:
     case ME_REQUEST_ERROR:
-      return {
-        ...state,
-        me: meReducer(state.me, action)
-      };
+      return { ...state, me: meReducer(state.me, action) };
     default:
       return state
   }

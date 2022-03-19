@@ -1,9 +1,10 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { CommentTextType, RootState, updateComment } from "../../store/reducer";
+import { CommentFormTextType, RootState } from "../../store/reducer";
 import { useMountEffect } from "../../hooks/useMountEffect";
 import { preventDefault } from "../../utils/react/preventDefault";
 import { CommentForm } from "../CommentForm";
+import { updateComment } from "../../store/comment/actions";
 
 interface ICommentFormContainerProps {
   id: string;
@@ -13,7 +14,7 @@ interface ICommentFormContainerProps {
 
 export function CommentFormContainer({ id, author = '', isMyself = false }: ICommentFormContainerProps) {
   const
-    value = useSelector<RootState, CommentTextType>(state => state && state.commentText),
+    value = useSelector<RootState, CommentFormTextType>(state => state && state.commentFormText),
     dispatch = useDispatch(),
     [placeholder, setPlaceholder] = useState('');
 
