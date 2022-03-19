@@ -1,55 +1,28 @@
 import * as React from "react";
+import { createStore, applyMiddleware, Action } from "redux";
+import { Provider } from "react-redux";
+import thunk, { ThunkMiddleware } from 'redux-thunk';
 import { hot } from 'react-hot-loader/root';
-
-import { useToken } from "./hooks/useToken";
 
 import { CardsList } from "./shared/CardsList";
 import { Content } from "./shared/Content";
 import { Header } from './shared/Header';
 import { Layout } from './shared/Layout';
 
+import { composeWithDevTools } from "redux-devtools-extension";
+import { PostsContextProvider } from "./shared/context/postsContext";
+import { rootReducer, RootState } from "./store/reducer";
+import { saveToken } from "./store/token/actions";
+
 import './main.global.sass';
 import './variables.global.sass';
-import { UserContextProvider } from "./shared/context/userContext";
-import { PostsContextProvider } from "./shared/context/postsContext";
 
-import { createStore, applyMiddleware, Middleware, Action } from "redux";
-import { Provider, useDispatch } from "react-redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { rootReducer, RootState, updateToken } from "./store/reducer";
-import thunk, { ThunkAction } from 'redux-thunk';
-import { useEffect } from "react";
-
-// const ping: Middleware = (store) => (next) => (action) => {
-//   console.log('ping');
-//   next(action);
-// };
-// const pong: Middleware = (store) => (next) => (action) => {
-//   console.log('pong');
-//   next(action);
-// };
-
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
-
-const timeout = (ms: number): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
-  dispatch({ type: 'START'});
-  setTimeout(() => dispatch({ type: 'FINISH'}), ms);
-
-}
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk as ThunkMiddleware<RootState, Action>)));
 
 function AppComponent() {
-  useEffect(() => {
-    const token = window.__token__;
-    store.dispatch(updateToken(token));
-    // @ts-ignore
-    store.dispatch(timeout(3000));
-    if (token?.length) {
-      localStorage.setItem('token', token);
-    }
-  }, [])
+  store.dispatch(saveToken());
   return (
     <Provider store={store}>
-      <UserContextProvider>
         <PostsContextProvider>
           <Layout >
             <Header />
@@ -58,7 +31,6 @@ function AppComponent() {
             </Content>
           </Layout>
         </PostsContextProvider>
-      </UserContextProvider>
     </Provider>
   )
 }
