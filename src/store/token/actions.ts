@@ -12,8 +12,9 @@ export type SetTokenAction = {
 export const
   saveToken = (): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch) => {
     useEffect(() => {
-      if (window.__token__) {
-        dispatch(updateToken(String(window.__token__)));
+      const token = window.__token__;
+      if (token.length) {
+        dispatch(updateToken(String(token)));
       }
     }, [])
   },

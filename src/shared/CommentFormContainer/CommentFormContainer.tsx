@@ -15,6 +15,8 @@ interface ICommentFormContainerProps {
 export function CommentFormContainer({ id, author = '', isMyself = false }: ICommentFormContainerProps) {
   const
     value = useSelector<RootState, CommentFormTextType>(state => state && state.commentFormText),
+    [touched, setTouched] = useState(false),
+    [valueError, setValueError] = useState(''),
     dispatch = useDispatch(),
     [placeholder, setPlaceholder] = useState('');
 
@@ -25,8 +27,29 @@ export function CommentFormContainer({ id, author = '', isMyself = false }: ICom
       author && dispatch(updateComment(id, `${author}, `));
   });
 
-  const handleChange = ({ target: { value } }: ChangeEvent<HTMLTextAreaElement>) => dispatch(updateComment(id, value ));
-  const handleSubmit = () => preventDefault(() => console.log(value?.[id]));
+  const validateValue = () => !value || !value[id] || String(value[id]).length <= 3
+    ? 'Комментарий не может быть меньше трех символов' : '';
 
-  return <CommentForm value={value?.[id]} placeholder={placeholder} onSubmit={handleSubmit} onChange={handleChange} />;
+  const isNotFormValid = !!validateValue();
+
+  const handleSubmit = () => {
+    setTouched(true);
+    setValueError(validateValue());
+
+    if (isNotFormValid) return;
+
+    alert('Форма отправлена');
+  }
+
+  return (
+    <CommentForm
+      value={value?.[id]}
+      touched={touched}
+      valueError={valueError}
+      disabledBtn={isNotFormValid}
+      placeholder={placeholder}
+      onSubmit={preventDefault(handleSubmit)}
+      onChange={({ target }: ChangeEvent<HTMLTextAreaElement>) => dispatch(updateComment(id, target.value))}
+    />
+  );
 }
