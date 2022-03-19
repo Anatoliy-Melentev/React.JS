@@ -16,6 +16,7 @@ interface ICommentProps {
 export function Comment({ id, comment, author }: ICommentProps) {
   const [showForm, setsShowForm] = useState(false);
   return (
+    <>
     <div className={styles.comment}>
       <CommentTree />
       <div className={styles.commentText}>
@@ -41,5 +42,7 @@ export function Comment({ id, comment, author }: ICommentProps) {
         </div>
       </div>
     </div>
+    <Break size={36} top />
+    </>
   );
 }
