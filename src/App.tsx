@@ -10,7 +10,6 @@ import { Header } from './shared/Header';
 import { Layout } from './shared/Layout';
 
 import { composeWithDevTools } from "redux-devtools-extension";
-import { PostsContextProvider } from "./shared/context/postsContext";
 import { rootReducer, RootState } from "./store/reducer";
 import { saveToken } from "./store/token/actions";
 
@@ -23,14 +22,12 @@ function AppComponent() {
   store.dispatch(saveToken());
   return (
     <Provider store={store}>
-        <PostsContextProvider>
-          <Layout >
-            <Header />
-            <Content>
-              <CardsList />
-            </Content>
-          </Layout>
-        </PostsContextProvider>
+      <Layout >
+        <Header />
+        <Content>
+          <CardsList />
+        </Content>
+      </Layout>
     </Provider>
   )
 }
