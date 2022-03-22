@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@hookform/resolvers": "^2.8.8",
     "@types/jest": "^27.4.0",
     "@types/react-redux": "^7.1.23",
     "axios": "^0.26.0",
@@ -17,7 +18,8 @@
     "redux-thunk": "^2.4.1",
     "ts-jest": "^27.1.2",
     "ts-node": "^10.4.0",
-    "unique-names-generator": "^4.6.0"
+    "unique-names-generator": "^4.6.0",
+    "yup": "^0.32.11"
   },
   "name": "react.js",
   "description": "Мой React.JS проект",
