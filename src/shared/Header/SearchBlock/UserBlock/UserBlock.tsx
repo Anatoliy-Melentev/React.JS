@@ -3,7 +3,7 @@ import { Break } from "../../../Break"
 import { Icon, EIcon } from '../../../Icon';
 import { Text, EColor } from "../../../Text"
 import styles from './userblock.sass';
-import { createLinkParams } from "../../../../utils/js/createLinkParams";
+import { createLink } from "../../../../utils/js/createLink";
 import { useUserData } from "../../../../hooks/useUserData";
 
 const
@@ -20,7 +20,7 @@ const
 export function UserBlock() {
   const { data: { name, iconImg }, loading } = useUserData();
   return (
-    <a href={url + createLinkParams(params)} className={styles.userBox} >
+    <a href={createLink(url, params)} className={styles.userBox} >
       <div className={styles.avatarBox}>
         {iconImg
           ? <img src={iconImg} alt="user avatar" className={styles.avatarImage}/>

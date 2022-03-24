@@ -13,8 +13,8 @@ export const
   saveToken = (): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch) => {
     useEffect(() => {
       const token = window.__token__;
-      if (token.length) {
-        dispatch(updateToken(String(token)));
+      if (token && token?.length && token != 'undefined') {
+        dispatch(updateToken(token));
       }
     }, [])
   },

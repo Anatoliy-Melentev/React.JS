@@ -2,7 +2,7 @@ import express from 'express';//const express = require('express');
 import ReactDOM from 'react-dom/server';
 import { App } from '../App';
 import { indexTemplate } from './indexTemplate';
-import { createLinkParams } from "../utils/js/createLinkParams";
+import { createLink } from "../utils/js/createLink";
 import axios from 'axios';
 
 const app = express();
@@ -17,7 +17,7 @@ app.get('/auth', (req, res) => {
   axios
     .post(
       'https://www.reddit.com/api/v1/access_token',
-      createLinkParams({
+      createLink('', {
         grant_type: 'authorization_code',
         code: req.query.code,
         redirect_uri: 'http://localhost:3000/auth',
