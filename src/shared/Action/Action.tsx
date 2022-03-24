@@ -13,7 +13,7 @@ interface IActionProps {
 export function Action({ children, size = 15, icon = '', onClick = () => {}, className = '' }: IActionProps) {
   return (
     <button className={`${styles.action} ${className}`} onClick={onClick}>
-      {icon && <Icon size={size} name={icon} />} {children}
+      {icon && <Icon size={size} name={icon} />} <span>{children}</span>
     </button>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './post.sass';
 import { EIcon } from "../Icon";
 import { KarmaCounter } from "../KarmaCounter";
@@ -12,20 +13,20 @@ import { IconBtn } from "../IconBtn";
 import { CommentFormHooks } from "../CommentFormHooks";
 
 interface IPostProps {
-  onClose?: () => void;
   title: string;
   author: string;
   date: string;
   score: number;
 }
 
-export function Post({ onClose, author, date, title, score }: IPostProps) {
+export function Post({ author, date, title, score }: IPostProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     function handleClick({ target }: MouseEvent) {
       if (target instanceof Node && !ref.current?.contains(target)) {
-        onClose && onClose();
+        navigate('/posts');
       }
     }
     document.addEventListener('click', handleClick);
@@ -38,7 +39,7 @@ export function Post({ onClose, author, date, title, score }: IPostProps) {
 
   return ReactDOM.createPortal((
     <div className={styles.modal} ref={ref}>
-      <IconBtn className={styles.close} icon={EIcon.close} onClick={() => onClose && onClose()} />
+      <IconBtn className={styles.close} icon={EIcon.close} onClick={() => navigate('/posts')} />
       <div className={styles.header}>
         <KarmaCounter score={score} />
         <PostTitle title={title} author={author} date={date} />

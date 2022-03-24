@@ -9,19 +9,25 @@
 .actions
   display: flex
   flex-flow: row nowrap
+  color: $greyD9
 
 .actions > * + *
   margin: 0 0 0 13px
+  color: $greyD9
+
+.commentsHeader
+  color: $greyD9
+
+.commentsIcon *
+  fill: $greyD9
 
 @media all and (min-width: 1024px)
   .controls
     order: 3
     flex: 0 0
     margin: 0 0 0 24px
-
   .commentsButton
     display: none
-
   .actions
     display: none
 
