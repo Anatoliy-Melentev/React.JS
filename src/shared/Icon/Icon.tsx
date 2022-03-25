@@ -23,6 +23,7 @@ export enum EIcon {
   anonim = 'anonim',
   close = 'close',
   stroke = 'stroke',
+  rocket = 'rocket',
 };
 
 export function Icon({ name, size = 20, className = '' }: IIcon) {

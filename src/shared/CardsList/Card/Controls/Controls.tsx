@@ -9,7 +9,9 @@ export function Controls({ score }: { score: number }) {
   return (
     <div className={styles.controls}>
       <KarmaCounter score={score} />
-      <Action className={styles.commentsButton} icon={EIcon.comments} size={20}>20</Action>
+      <div className={styles.commentsButton}>
+        <Action className={styles.commentsIcon} icon={EIcon.comments} size={20}>20</Action>
+      </div>
       <div className={styles.actions}>
         <IconBtn icon={EIcon.shareCircle} />
         <IconBtn icon={EIcon.saveCircle} />

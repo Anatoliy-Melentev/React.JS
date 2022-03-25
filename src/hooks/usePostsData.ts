@@ -17,10 +17,12 @@ export function usePostsData({ apiUrl, params, ref, addCount, allowLoad }: IUseP
     [loading, setLoading] = useState(false),
     [nextAfter, setNextAfter] = useState<string>(''),
     [errorLoading, setErrorLoading] = useState(''),
-    token = useSelector<RootState, string | undefined>(state => state && state.token);
+    token = useSelector<RootState, string | undefined>(state => state.token);
+
+  useEffect(() => setPosts([]), [apiUrl]);
 
   useEffect(() => {
-    if (token && token?.length && token != 'undefined') {
+    if (!token || token.toString().length < 15) {
       return;
     }
 
@@ -65,7 +67,8 @@ export function usePostsData({ apiUrl, params, ref, addCount, allowLoad }: IUseP
         observer.unobserve(ref.current);
       }
     }
-  }, [ref, token, nextAfter, allowLoad]);
+  }, [ref, token, nextAfter, allowLoad, apiUrl]);
+
 
   return [posts, loading, errorLoading];
 }

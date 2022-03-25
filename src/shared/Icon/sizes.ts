@@ -16,6 +16,7 @@ const baseSizes: IBaseSizes = {
   anonim: [20, 20],
   close: [20, 20],
   stroke: [20, 11],
+  rocket: [17, 20],
 };
 
 const enum sizes {

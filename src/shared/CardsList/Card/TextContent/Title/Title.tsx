@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './title.sass';
-import { Post } from "../../../../Post";
+import { Link } from "react-router-dom";
 
 interface ITitleProps {
   author: string;
@@ -9,17 +9,10 @@ interface ITitleProps {
   date: string;
 }
 
-export function Title({ title, author, date, score }: ITitleProps) {
-  const [isModalOpended, setIsModalOpened] = useState(false);
-
+export function Title({ title }: ITitleProps) {
   return (
     <h2 className={styles.title}>
-      <button className={styles.postLink} onClick={() => !isModalOpended && setIsModalOpened(true)}>{title}</button>
-      {isModalOpended &&
-      <Post
-        title={title} author={author} date={date} score={score}
-        onClose={() => setIsModalOpened(false)}
-      />}
+      <Link to="/posts/1" className={styles.postLink} >{title}</Link>
     </h2>
   );
 }
