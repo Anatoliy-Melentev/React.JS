@@ -57,7 +57,7 @@
     "webpack-hot-middleware": "^2.25.1",
     "webpack-node-externals": "^3.0.0"
   },
-  "name": "http://reddit.making-web.ru/",
+  "name": "reddit.making-web.ru",
   "description": "Мой React.JS проект",
   "version": "1.0.0",
   "main": "index.js",
