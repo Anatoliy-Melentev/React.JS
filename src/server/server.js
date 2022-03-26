@@ -7,6 +7,10 @@ import { createLink } from "../utils/js/createLink";
 import axios from 'axios';
 import compression from 'compression';
 
+const URI = process.env.URI || 'reddit.making-web.ru';
+const CLIENT_ID = process.env.CLIENT_ID || 'xX_UPv8JbH-ZK_TPvrYqPA';
+const CLIENT_SECRET = process.env.CLIENT_SECRET || 'tzi2H-iFYglGeJD_TATqITeuGhVKtQ';
+
 const PORT = process.env.PORT || 3000;
 const IS_DEV = process.env.NODE_ENV !== 'production';
 
@@ -25,12 +29,12 @@ app.get('/auth', (req, res) => {
       createLink('', {
         grant_type: 'authorization_code',
         code: req.query.code,
-        redirect_uri: `http://${process.env.URI}/auth`,
+        redirect_uri: `http://${URI}/auth`,
       }),
       {
         auth: {
-          username: process.env.CLIENT_ID,
-          password: process.env.CLIENT_SECRET,
+          username: CLIENT_ID,
+          password: CLIENT_SECRET,
         },
         headers: { 'Content-type': 'application/x-www-form-urlencoded' },
       }
@@ -38,8 +42,8 @@ app.get('/auth', (req, res) => {
     .then(({ data }) => res.send(indexTemplate(
       ReactDOM.renderToString(App),
       data['access_token'],
-      process.env.CLIENT_ID,
-      `http://${process.env.URI}/auth`,
+      CLIENT_ID,
+      `http://${URI}/auth`,
     )))
     .catch(console.log);
 });
@@ -48,9 +52,9 @@ app.get('/*', (req, res) => {
     res.send(indexTemplate(
       ReactDOM.renderToString(App),
       '',
-      process.env.CLIENT_ID,
-      `http://${process.env.URI}/auth`,
+      CLIENT_ID,
+      `http://${URI}/auth`,
     ));
 });
 
-app.listen(PORT, () => console.log(`Server started on http://${process.env.URI}`));
+app.listen(PORT, () => console.log(`Server started on http://${URI}`));
