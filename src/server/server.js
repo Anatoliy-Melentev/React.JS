@@ -4,8 +4,9 @@ import ReactDOM from 'react-dom/server';
 import { App } from '../App';
 import { indexTemplate } from './indexTemplate';
 import { createLink } from "../utils/js/createLink";
-import { StaticRouter } from 'react-router-dom/server';
 import axios from 'axios';
+
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -18,19 +19,32 @@ app.get('/auth', (req, res) => {
       createLink('', {
         grant_type: 'authorization_code',
         code: req.query.code,
-        redirect_uri: 'http://localhost:3000/auth',
+        redirect_uri: process.env.URI + '/auth',
       }),
       {
-        auth: { username: 'VxRfhdESA8Ms6wZqVG9SFA', password: 'DpfTn6pz5CAnPRP8jQbBjcnYTvIfSw' },
+        auth: {
+          username: process.env.CLIENT_ID,
+          password: process.env.CLIENT_SECRET
+        },
         headers: { 'Content-type': 'application/x-www-form-urlencoded' },
       }
     )
-    .then(({ data }) => res.send(indexTemplate(ReactDOM.renderToString(App), data['access_token'])))
+    .then(({ data }) => res.send(indexTemplate(
+      ReactDOM.renderToString(App),
+      data['access_token'],
+      process.env.CLIENT_ID,
+      process.env.URI + '/auth'
+    )))
     .catch(console.log);
 });
 
 app.get('/*', (req, res) => {
-    res.send(indexTemplate(ReactDOM.renderToString(App)));
+    res.send(indexTemplate(
+      ReactDOM.renderToString(App),
+      '',
+      process.env.CLIENT_ID,
+      process.env.URI + '/auth'
+    ));
 });
 
-app.listen(3000, () => console.log('Server started on http://localhost:3000'));
+app.listen(PORT, () => console.log(`Server started on ${process.env.URI}`));

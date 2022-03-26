@@ -23,13 +23,7 @@
     "ts-jest": "^27.1.2",
     "ts-node": "^10.4.0",
     "unique-names-generator": "^4.6.0",
-    "yup": "^0.32.11"
-  },
-  "name": "react.js",
-  "description": "Мой React.JS проект",
-  "version": "1.0.0",
-  "main": "index.js",
-  "devDependencies": {
+    "yup": "^0.32.11",
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
@@ -63,6 +57,13 @@
     "webpack-hot-middleware": "^2.25.1",
     "webpack-node-externals": "^3.0.0"
   },
+  "name": "http://reddit.making-web.ru/",
+  "description": "Мой React.JS проект",
+  "version": "1.0.0",
+  "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -72,9 +73,10 @@
   },
   "scripts": {
     "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.js",
-    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "dev": "cross-env NODE_ENV=development node ./bin/dev.js",
-    "test": "jest"
+    "build": "env URI=http://reddit.making-web.ru CLIENT_ID=xX_UPv8JbH-ZK_TPvrYqPA CLIENT_SECRET=tzi2H-iFYglGeJD_TATqITeuGhVKtQ NODE_ENV=production webpack --config webpack.config.js",
+    "dev": "cross-env URI=http://localhost:3000 CLIENT_ID=VxRfhdESA8Ms6wZqVG9SFA CLIENT_SECRET=DpfTn6pz5CAnPRP8jQbBjcnYTvIfSw NODE_ENV=development node ./bin/dev.js",
+    "test": "jest",
+    "start": "env URI=http://reddit.making-web.ru CLIENT_ID=xX_UPv8JbH-ZK_TPvrYqPA CLIENT_SECRET=tzi2H-iFYglGeJD_TATqITeuGhVKtQ node ./dist/server/server.js"
   },
   "repository": {
     "type": "git",
