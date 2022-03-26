@@ -12,6 +12,15 @@ function setupDevtool() {
 	if (IS_PROD) return false;
 }
 
+function getEntry() {
+  const entry = [path.resolve(__dirname, '../src/client/index.jsx')];
+  if (IS_DEV) {
+    entry.push('webpack-hot-middleware/client?path=http://localhost:3001/static/__webpack_hmr');
+  }
+
+  return entry;
+}
+
 module.exports = {
 	watchOptions: { ignored: /dist/ },
 	resolve: {
@@ -19,10 +28,7 @@ module.exports = {
 		alias: { 'react-dom': IS_DEV ? '@hot-loader/react-dom' : 'react-dom' },
 	},
 	mode: NODE_ENV ? NODE_ENV : 'development',
-	entry: [
-		path.resolve(__dirname, '../src/client/index.jsx'),
-		'webpack-hot-middleware/client?path=http://localhost:3001/static/__webpack_hmr',
-	],
+	entry: getEntry(),
 	output: {
 		path: path.resolve(__dirname, '../dist/client'),
 		filename: 'client.js',

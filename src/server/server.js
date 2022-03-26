@@ -5,10 +5,16 @@ import { App } from '../App';
 import { indexTemplate } from './indexTemplate';
 import { createLink } from "../utils/js/createLink";
 import axios from 'axios';
+import compression from 'compression';
 
 const PORT = process.env.PORT || 3000;
+const IS_DEV = process.env.NODE_ENV !== 'production';
 
 const app = express();
+
+if (IS_DEV) {
+  app.use(compression());
+}
 
 app.use('/static', express.static('./dist/client'));
 
@@ -19,12 +25,12 @@ app.get('/auth', (req, res) => {
       createLink('', {
         grant_type: 'authorization_code',
         code: req.query.code,
-        redirect_uri: process.env.URI + '/auth',
+        redirect_uri: `http://${process.env.URI}/auth`,
       }),
       {
         auth: {
           username: process.env.CLIENT_ID,
-          password: process.env.CLIENT_SECRET
+          password: process.env.CLIENT_SECRET,
         },
         headers: { 'Content-type': 'application/x-www-form-urlencoded' },
       }
@@ -33,7 +39,7 @@ app.get('/auth', (req, res) => {
       ReactDOM.renderToString(App),
       data['access_token'],
       process.env.CLIENT_ID,
-      process.env.URI + '/auth'
+      `http://${process.env.URI}/auth`,
     )))
     .catch(console.log);
 });
@@ -43,8 +49,8 @@ app.get('/*', (req, res) => {
       ReactDOM.renderToString(App),
       '',
       process.env.CLIENT_ID,
-      process.env.URI + '/auth'
+      `http://${process.env.URI}/auth`,
     ));
 });
 
-app.listen(PORT, () => console.log(`Server started on ${process.env.URI}`));
+app.listen(PORT, () => console.log(`Server started on http://${process.env.URI}`));
