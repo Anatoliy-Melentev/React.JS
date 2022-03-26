@@ -5,20 +5,23 @@ import { Text, EColor } from "../../../Text"
 import styles from './userblock.sass';
 import { createLink } from "../../../../utils/js/createLink";
 import { useUserData } from "../../../../hooks/useUserData";
-
-const
-  url = `https://www.reddit.com/api/v1/authorize?`,
-  params: {[n: string]: string} = {
-    client_id: 'VxRfhdESA8Ms6wZqVG9SFA',
-    response_type: 'code',
-    state: 'random_string',
-    redirect_uri: 'http://localhost:3000/auth',
-    duration: 'permanent',
-    scope: 'read submit identity',
-  };
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/reducer";
 
 export function UserBlock() {
-  const { data: { name, iconImg }, loading } = useUserData();
+  const
+    { data: { name, iconImg }, loading } = useUserData(),
+    { client_id, redirect_uri } = useSelector<RootState, RootState>(state => state),
+    url = `https://www.reddit.com/api/v1/authorize?`,
+    params: {[n: string]: string} = {
+      client_id: client_id || '',
+      response_type: 'code',
+      state: 'random_string',
+      redirect_uri: redirect_uri || '',
+      duration: 'permanent',
+      scope: 'read submit identity',
+    };
+
   return (
     <a href={createLink(url, params)} className={styles.userBox} >
       <div className={styles.avatarBox}>
