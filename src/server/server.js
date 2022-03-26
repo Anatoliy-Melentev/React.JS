@@ -12,7 +12,7 @@ const CLIENT_ID = process.env.CLIENT_ID || 'xX_UPv8JbH-ZK_TPvrYqPA';
 const CLIENT_SECRET = process.env.CLIENT_SECRET || 'tzi2H-iFYglGeJD_TATqITeuGhVKtQ';
 
 const PORT = process.env.PORT || 3000;
-const IS_DEV = process.env.NODE_ENV !== 'production';
+const IS_DEV = process.env.NODE_ENV === 'development';
 
 const app = express();
 
