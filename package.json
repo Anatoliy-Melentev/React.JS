@@ -74,10 +74,10 @@
   },
   "scripts": {
     "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.js",
-    "build": "env URI=reddit.making-web.ru CLIENT_ID=xX_UPv8JbH-ZK_TPvrYqPA CLIENT_SECRET=tzi2H-iFYglGeJD_TATqITeuGhVKtQ NODE_ENV=production webpack --config webpack.config.js",
+    "build": "cross-env URI=reddit.making-web.ru CLIENT_ID=xX_UPv8JbH-ZK_TPvrYqPA CLIENT_SECRET=tzi2H-iFYglGeJD_TATqITeuGhVKtQ NODE_ENV=production webpack --config webpack.config.js",
     "dev": "cross-env URI=localhost:3000 CLIENT_ID=VxRfhdESA8Ms6wZqVG9SFA CLIENT_SECRET=DpfTn6pz5CAnPRP8jQbBjcnYTvIfSw NODE_ENV=development node ./bin/dev.js",
     "test": "jest",
-    "start": "env URI=reddit.making-web.ru CLIENT_ID=xX_UPv8JbH-ZK_TPvrYqPA CLIENT_SECRET=tzi2H-iFYglGeJD_TATqITeuGhVKtQ node ./dist/server/server.js"
+    "start": "cross-env URI=reddit.making-web.ru CLIENT_ID=xX_UPv8JbH-ZK_TPvrYqPA CLIENT_SECRET=tzi2H-iFYglGeJD_TATqITeuGhVKtQ node ./dist/server/server.js"
   },
   "repository": {
     "type": "git",
