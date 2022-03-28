@@ -12,6 +12,7 @@ import { IconBtn } from "../IconBtn";
 //import { CommentFormHooks } from "../CommentFormHooks";
 //import { CommentFormMobx } from "../CommentFormMobx";
 import { CommentFormContainer } from "../CommentFormContainer";
+//import { CommentFormEffector } from "../CommentFormEffector";
 
 interface IPostProps {
   title: string;
@@ -56,6 +57,7 @@ export function Post({ author, date, title, score }: IPostProps) {
       </div>
       <CommentFormContainer id={'0'} isMyself />
       {/*<CommentFormMobx />*/}
+      {/*<CommentFormEffector />*/}
       {/*<CommentFormHooks id={"0"} author={'Анатолий'} isMyself />*/}
       <Break size={36} top />
       <CommentsFilter/>
