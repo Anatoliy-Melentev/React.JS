@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './post.sass';
 import { EIcon } from "../Icon";
 import { KarmaCounter } from "../KarmaCounter";
@@ -9,8 +9,9 @@ import { CommentsFilter } from "../CommentsFilter";
 import { Break } from "../Break";
 import { PostTitle } from "./PostTitle";
 import { IconBtn } from "../IconBtn";
-//import { CommentFormContainer } from "../CommentFormContainer";
-import { CommentFormHooks } from "../CommentFormHooks";
+//import { CommentFormHooks } from "../CommentFormHooks";
+//import { CommentFormMobx } from "../CommentFormMobx";
+import { CommentFormContainer } from "../CommentFormContainer";
 
 interface IPostProps {
   title: string;
@@ -20,17 +21,22 @@ interface IPostProps {
 }
 
 export function Post({ author, date, title, score }: IPostProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
+  const
+    ref = useRef<HTMLDivElement>(null),
+    { pathname } = useLocation(),
+    navigate = useNavigate(),
+    getPath = (pathname: string) => {
+      const path = pathname.match(/^\/(.*)\//);
+      return path && path.length >= 1 ? path[1] : '';
+    },
+    handleClick = ({ target }: MouseEvent) => {
+      if (target instanceof Node && !ref.current?.contains(target)) {
+        navigate(`/${getPath(pathname)}`);
+      }
+    };
 
   useEffect(() => {
-    function handleClick({ target }: MouseEvent) {
-      if (target instanceof Node && !ref.current?.contains(target)) {
-        navigate('/posts');
-      }
-    }
     document.addEventListener('click', handleClick);
-
     return () => document.removeEventListener('click', handleClick);
   }, []);
 
@@ -39,7 +45,7 @@ export function Post({ author, date, title, score }: IPostProps) {
 
   return ReactDOM.createPortal((
     <div className={styles.modal} ref={ref}>
-      <IconBtn className={styles.close} icon={EIcon.close} onClick={() => navigate('/posts')} />
+      <IconBtn className={styles.close} icon={EIcon.close} onClick={() => navigate(`/${getPath(pathname)}`)} />
       <div className={styles.header}>
         <KarmaCounter score={score} />
         <PostTitle title={title} author={author} date={date} />
@@ -48,7 +54,9 @@ export function Post({ author, date, title, score }: IPostProps) {
         <p>Есть над чем задуматься: тщательные исследования конкурентов представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и должны быть ассоциативно распределены по отраслям. Прежде всего, начало повседневной работы по формированию позиции однозначно фиксирует необходимость кластеризации усилий. Но сторонники тоталитаризма в науке и по сей день остаются уделом либералов, которые жаждут быть превращены в посмешище, хотя само их существование приносит несомненную пользу обществу.</p>
         <p>Есть над чем задуматься: тщательные исследования конкурентов представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и должны быть ассоциативно распределены по отраслям. Прежде всего, начало повседневной работы по формированию позиции однозначно фиксирует необходимость кластеризации усилий. Но сторонники тоталитаризма в науке и по сей день остаются уделом либералов, которые жаждут быть превращены в посмешище, хотя само их существование приносит несомненную пользу обществу.</p>
       </div>
-      <CommentFormHooks id={"0"} author={'Анатолий'} isMyself />
+      <CommentFormContainer id={'0'} isMyself />
+      {/*<CommentFormMobx />*/}
+      {/*<CommentFormHooks id={"0"} author={'Анатолий'} isMyself />*/}
       <Break size={36} top />
       <CommentsFilter/>
       <Break size={48} top />
