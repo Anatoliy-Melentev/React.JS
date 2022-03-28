@@ -12,6 +12,7 @@ import { IconBtn } from "../IconBtn";
 //import { CommentFormHooks } from "../CommentFormHooks";
 //import { CommentFormMobx } from "../CommentFormMobx";
 import { CommentFormContainer } from "../CommentFormContainer";
+//import { CommentFormJotai } from "../CommentFormJotai";
 //import { CommentFormEffector } from "../CommentFormEffector";
 
 interface IPostProps {
@@ -56,6 +57,7 @@ export function Post({ author, date, title, score }: IPostProps) {
         <p>Есть над чем задуматься: тщательные исследования конкурентов представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и должны быть ассоциативно распределены по отраслям. Прежде всего, начало повседневной работы по формированию позиции однозначно фиксирует необходимость кластеризации усилий. Но сторонники тоталитаризма в науке и по сей день остаются уделом либералов, которые жаждут быть превращены в посмешище, хотя само их существование приносит несомненную пользу обществу.</p>
       </div>
       <CommentFormContainer id={'0'} isMyself />
+      {/*<CommentFormJotai />*/}
       {/*<CommentFormMobx />*/}
       {/*<CommentFormEffector />*/}
       {/*<CommentFormHooks id={"0"} author={'Анатолий'} isMyself />*/}
