@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './title.sass';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface ITitleProps {
   author: string;
@@ -10,9 +10,11 @@ interface ITitleProps {
 }
 
 export function Title({ title }: ITitleProps) {
+  const { pathname } = useLocation();
+
   return (
     <h2 className={styles.title}>
-      <Link to="/posts/1" className={styles.postLink} >{title}</Link>
+      <Link to={`/${pathname}/1`} className={styles.postLink} >{title}</Link>
     </h2>
   );
 }

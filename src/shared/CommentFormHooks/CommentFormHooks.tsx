@@ -6,6 +6,7 @@ import { updateComment } from "../../store/comment/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { CommentFormTextType, RootState } from "../../store/reducer";
 import { preventDefault } from "../../utils/react/preventDefault";
+import { useUserData } from "../../hooks/useUserData";
 
 interface ICommentFormHooksProps {
   id: string;
@@ -18,11 +19,12 @@ export function CommentFormHooks({ id, author = '', isMyself = false }: IComment
     value = useSelector<RootState, CommentFormTextType>(state => state && state.commentFormText),
     [placeholder, setPlaceholder] = useState(''),
     { register, handleSubmit, formState:{ errors } } = useForm(),
+    { data: { name } } = useUserData(),
     dispatch = useDispatch();
 
   useMountEffect(() => {
     if (isMyself)
-      setPlaceholder(`${author ? author + ', о' : 'О'}ставьте ваш комментарий`);
+      setPlaceholder(`${name ? name + ', о' : 'О'}ставьте ваш комментарий`);
     else
       author && dispatch(updateComment(id, `${author}, `));
   });

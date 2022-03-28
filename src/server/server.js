@@ -27,34 +27,21 @@ app.get('/auth', (req, res) => {
     .post(
       'https://www.reddit.com/api/v1/access_token',
       createLink('', {
-        grant_type: 'authorization_code',
-        code: req.query.code,
-        redirect_uri: `http://${URI}/auth`,
+        grant_type: 'authorization_code', code: req.query.code, redirect_uri: `http://${URI}/auth`,
       }),
       {
-        auth: {
-          username: CLIENT_ID,
-          password: CLIENT_SECRET,
-        },
+        auth: { username: CLIENT_ID, password: CLIENT_SECRET },
         headers: { 'Content-type': 'application/x-www-form-urlencoded' },
       }
     )
     .then(({ data }) => res.send(indexTemplate(
-      ReactDOM.renderToString(App),
-      data['access_token'],
-      CLIENT_ID,
-      `http://${URI}/auth`,
+      ReactDOM.renderToString(App), data['access_token'], CLIENT_ID, `http://${URI}/auth`,
     )))
     .catch(console.log);
 });
 
 app.get('/*', (req, res) => {
-    res.send(indexTemplate(
-      ReactDOM.renderToString(App),
-      '',
-      CLIENT_ID,
-      `http://${URI}/auth`,
-    ));
+    res.send(indexTemplate(ReactDOM.renderToString(App), '', CLIENT_ID, `http://${URI}/auth`));
 });
 
 app.listen(PORT, () => console.log(`Server started on http://${URI}`));

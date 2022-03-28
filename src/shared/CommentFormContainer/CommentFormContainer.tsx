@@ -5,6 +5,7 @@ import { useMountEffect } from "../../hooks/useMountEffect";
 import { preventDefault } from "../../utils/react/preventDefault";
 import { CommentForm } from "../CommentForm";
 import { updateComment } from "../../store/comment/actions";
+import { useUserData } from "../../hooks/useUserData";
 
 interface ICommentFormContainerProps {
   id: string;
@@ -15,6 +16,7 @@ interface ICommentFormContainerProps {
 export function CommentFormContainer({ id, author = '', isMyself = false }: ICommentFormContainerProps) {
   const
     value = useSelector<RootState, CommentFormTextType>(state => state && state.commentFormText),
+    { data: { name } } = useUserData(),
     [touched, setTouched] = useState(false),
     [valueError, setValueError] = useState(''),
     dispatch = useDispatch(),
@@ -22,13 +24,13 @@ export function CommentFormContainer({ id, author = '', isMyself = false }: ICom
 
   useMountEffect(() => {
     if (isMyself)
-      setPlaceholder(`${author ? author + ', о' : 'О'}ставьте ваш комментарий`);
+      setPlaceholder(`${name ? name + ', о' : 'О'}ставьте ваш комментарий`);
     else
       author && dispatch(updateComment(id, `${author}, `));
   });
 
-  const validateValue = () => !value || !value[id] || String(value[id]).length <= 3
-    ? 'Комментарий не может быть меньше трех символов' : '';
+  const validateValue = () =>
+    !value || !value[id] || String(value[id]).length <= 3 ? 'Комментарий не может быть меньше трех символов' : '';
 
   const isNotFormValid = !!validateValue();
 
@@ -52,4 +54,4 @@ export function CommentFormContainer({ id, author = '', isMyself = false }: ICom
       onChange={({ target }: ChangeEvent<HTMLTextAreaElement>) => dispatch(updateComment(id, target.value))}
     />
   );
-}
+};
