@@ -14,7 +14,7 @@ export function Title({ title }: ITitleProps) {
 
   return (
     <h2 className={styles.title}>
-      <Link to={`/${pathname}/1`} className={styles.postLink} >{title}</Link>
+      <Link to={`${pathname}/1`} className={styles.postLink} >{title}</Link>
     </h2>
   );
 }
